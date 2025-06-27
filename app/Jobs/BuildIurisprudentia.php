@@ -16,6 +16,8 @@ class BuildIurisprudentia implements ShouldBeUnique, ShouldQueue
 
     public $timeout = 60;
 
+    public $uniqueFor = 60;
+
     public function handle(): void
     {
         $frontendPath = config('iurisprudentia.path').'/frontend';
