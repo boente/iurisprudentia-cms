@@ -140,7 +140,7 @@ class CollectionResource extends Resource
                                             ->collapsed()
                                             ->itemLabel(fn (array $state): ?string => $state['title'] ?? null)
                                             ->schema([
-                                                Forms\Components\TextArea::make('title')
+                                                Forms\Components\Textarea::make('title')
                                                     ->required()
                                                     ->rows(3)
                                                     ->columnSpanFull(),
@@ -181,7 +181,7 @@ class CollectionResource extends Resource
                                             ->collapsed()
                                             ->itemLabel(fn (array $state): ?string => $state['title'] ?? null)
                                             ->schema([
-                                                Forms\Components\TextArea::make('title')
+                                                Forms\Components\Textarea::make('title')
                                                     ->required()
                                                     ->rows(3)
                                                     ->columnSpanFull(),
