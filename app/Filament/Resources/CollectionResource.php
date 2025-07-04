@@ -21,6 +21,7 @@ class CollectionResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Tabs::make('Collection Details')
+                    ->persistTabInQueryString()
                     ->columnSpanFull()
                     ->tabs([
                         Forms\Components\Tabs\Tab::make('General')
@@ -40,11 +41,17 @@ class CollectionResource extends Resource
                                         Forms\Components\TextInput::make('data.col_id')
                                             ->label('Collection ID')
                                             ->required()
-                                            ->numeric(),
+                                            ->numeric()
+                                            ->afterStateUpdated(function ($state, callable $set) {
+                                                $set('data.col_id', (int) $state);
+                                            }),
                                         Forms\Components\TextInput::make('data.crowd_id')
                                             ->label('Crowd ID')
                                             ->required()
-                                            ->numeric(),
+                                            ->numeric()
+                                            ->afterStateUpdated(function ($state, callable $set) {
+                                                $set('data.crowd_id', (int) $state);
+                                            }),
                                         Forms\Components\TextInput::make('data.editionName')
                                             ->label('Edition Name')
                                             ->required()
@@ -133,12 +140,16 @@ class CollectionResource extends Resource
                                             ->collapsed()
                                             ->itemLabel(fn (array $state): ?string => $state['title'] ?? null)
                                             ->schema([
-                                                Forms\Components\TextInput::make('title')
+                                                Forms\Components\TextArea::make('title')
                                                     ->required()
+                                                    ->rows(3)
                                                     ->columnSpanFull(),
                                                 Forms\Components\TextInput::make('docId')
                                                     ->label('Document ID')
                                                     ->numeric()
+                                                    ->afterStateUpdated(function ($state, callable $set) {
+                                                        $set('docId', (int) $state);
+                                                    })
                                                     ->required(),
                                                 Forms\Components\TextInput::make('metadata.Entstehungsjahr')
                                                     ->label('Publication Year'),
@@ -170,12 +181,16 @@ class CollectionResource extends Resource
                                             ->collapsed()
                                             ->itemLabel(fn (array $state): ?string => $state['title'] ?? null)
                                             ->schema([
-                                                Forms\Components\TextInput::make('title')
+                                                Forms\Components\TextArea::make('title')
                                                     ->required()
+                                                    ->rows(3)
                                                     ->columnSpanFull(),
                                                 Forms\Components\TextInput::make('docId')
                                                     ->label('Document ID')
                                                     ->numeric()
+                                                    ->afterStateUpdated(function ($state, callable $set) {
+                                                        $set('docId', (int) $state);
+                                                    })
                                                     ->required(),
                                                 Forms\Components\TextInput::make('metadata.Entstehungsjahr')
                                                     ->label('Publication Year'),
